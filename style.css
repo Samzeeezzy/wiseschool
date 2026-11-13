@@ -329,3 +329,67 @@
 @media(max-width:900px){.why-wise-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.why-wise-grid{grid-template-columns:1fr;gap:14px}.why-wise-card{min-height:0;padding:25px 23px}.why-wise .section-heading{margin-bottom:28px}}
 @media(prefers-reduced-motion:reduce){.why-wise-card{transition:none}.why-wise-card:hover{transform:none}}
+
+
+/* Refined classic finish for the Why Choose WISE section */
+.why-wise{
+  background:linear-gradient(180deg,#f8f7f2 0%,#f2f6fb 100%);
+  padding-top:clamp(68px,8vw,100px);
+  padding-bottom:clamp(68px,8vw,100px)
+}
+.why-wise .section-heading{max-width:790px;margin:0 auto 48px}
+.why-wise .section-heading .eyebrow{color:#9a7628;letter-spacing:.19em}
+.why-wise .section-heading h2{color:#123b63}
+.why-wise .section-heading h2 em{color:#a47a20}
+.why-wise .section-heading p{max-width:650px;margin:15px auto 0;color:#68798b;line-height:1.9}
+.why-wise-grid{gap:22px}
+.why-wise-card{
+  min-height:245px;
+  padding:32px 28px 30px;
+  border:1px solid #e6ddc8;
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff 0%,#fffdf8 100%);
+  box-shadow:0 9px 28px rgba(18,59,99,.065);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start
+}
+.why-wise-card:before{
+  left:50%;top:0;width:48px;height:3px;
+  transform:translateX(-50%);
+  border-radius:0 0 8px 8px;
+  background:linear-gradient(90deg,#c5a15a,#f4d98a)
+}
+.why-wise-card:hover{
+  transform:translateY(-4px);
+  border-color:#d8c38d;
+  box-shadow:0 16px 34px rgba(18,59,99,.11)
+}
+.why-wise-number{
+  right:20px;top:17px;
+  color:#e9e1cf;
+  font:600 25px var(--serif)
+}
+.why-wise-icon{
+  width:58px;height:58px;
+  margin:2px 0 19px;
+  border:1px solid #e1cc91;
+  background:radial-gradient(circle at 35% 30%,#fffdf5,#f5ebd1);
+  color:#9b7627;
+  font-family:var(--serif);
+  font-size:25px;
+  box-shadow:inset 0 0 0 4px rgba(197,161,90,.08),0 5px 13px rgba(164,122,32,.08)
+}
+.why-wise-card h3{
+  margin:0 0 11px;
+  color:#123b63;
+  font:600 22px/1.25 var(--serif)
+}
+.why-wise-card p{max-width:290px;color:#667789;font-size:12px;line-height:1.9}
+@media(max-width:560px){
+  .why-wise-grid{gap:16px}
+  .why-wise-card{min-height:0;padding:29px 24px 27px;border-radius:20px}
+  .why-wise .section-heading{margin-bottom:32px}
+}
