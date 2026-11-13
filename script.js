@@ -222,3 +222,22 @@ document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
     }
   });
 })();
+
+
+// Reveal the Why Choose WISE cards with a staggered shuffle-deal effect.
+(() => {
+  const section = document.querySelector('.why-wise');
+  if (!section) return;
+  const cards = section.querySelectorAll('.why-wise-card');
+  if (!cards.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)) return;
+  section.classList.add('wise-shuffle-ready');
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      section.classList.add('wise-shuffle-visible');
+      observer.disconnect();
+    }
+  }, { threshold: 0.18 });
+  observer.observe(section);
+})();
