@@ -152,3 +152,73 @@ document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
     counters.forEach(animateCounter);
   }
 })();
+
+
+// Accessible website search: find matching homepage sections and useful pages.
+(() => {
+  const toggle = document.querySelector('.site-search-toggle');
+  const panel = document.querySelector('#site-search-panel');
+  const form = document.querySelector('.site-search-form');
+  const input = document.querySelector('#site-search-input');
+  const results = document.querySelector('.site-search-results');
+  const close = document.querySelector('.site-search-close');
+  if (!toggle || !panel || !form || !input || !results || !close) return;
+
+  const searchable = [...document.querySelectorAll('main section[id]')].map(section => {
+    const heading = section.querySelector('h1,h2,h3');
+    return {
+      title: heading?.textContent.trim() || section.id.replace(/-/g, ' '),
+      text: section.textContent.replace(/\s+/g, ' ').trim().slice(0, 260),
+      href: '#' + section.id,
+      content: section.textContent.toLowerCase()
+    };
+  });
+  searchable.push(
+    {title:'Student Result Login',text:'Access the student result portal.',href:'result-login.html',content:'student result portal login'},
+    {title:'Teacher Login',text:'Open the WISE teacher login page.',href:'teacher-login.html',content:'teacher staff login'}
+  );
+
+  const closeSearch = () => {
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded','false');
+  };
+  toggle.addEventListener('click', () => {
+    const opening = panel.hidden;
+    panel.hidden = !opening;
+    toggle.setAttribute('aria-expanded',String(opening));
+    if (opening) input.focus();
+  });
+  close.addEventListener('click',closeSearch);
+  form.addEventListener('submit',event => event.preventDefault());
+  input.addEventListener('input',() => {
+    const query = input.value.trim().toLowerCase();
+    results.replaceChildren();
+    if (!query) return;
+    const matches = searchable.filter(item => (item.title+' '+item.content).includes(query)).slice(0,8);
+    if (!matches.length) {
+      const empty=document.createElement('p');
+      empty.className='site-search-empty';
+      empty.textContent='No matching pages or sections found. Try another keyword.';
+      results.append(empty);
+      return;
+    }
+    matches.forEach(item => {
+      const link=document.createElement('a');
+      link.className='site-search-result';
+      link.href=item.href;
+      const title=document.createElement('strong');
+      title.textContent=item.title;
+      const description=document.createElement('span');
+      description.textContent=item.text;
+      link.append(title,description);
+      link.addEventListener('click',closeSearch);
+      results.append(link);
+    });
+  });
+  document.addEventListener('keydown',event => {
+    if (event.key==='Escape' && !panel.hidden) {
+      closeSearch();
+      toggle.focus();
+    }
+  });
+})();
