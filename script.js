@@ -115,3 +115,40 @@ document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
     button.setAttribute('aria-expanded', String(isOpen));
   });
 });
+
+
+// Count WISE achievement figures when the standalone statistics section enters view.
+(() => {
+  const counters = [...document.querySelectorAll('.glance-number [data-count], .glance-secondary [data-count]')];
+  if (!counters.length) return;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animateCounter = (el) => {
+    if (el.dataset.counted === 'true') return;
+    el.dataset.counted = 'true';
+    const target = Number(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    if (reducedMotion) { el.textContent = target.toLocaleString() + suffix; return; }
+    const duration = 1500;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const section = document.querySelector('.wise-at-glance');
+  if (!section) return;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        counters.forEach(animateCounter);
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    observer.observe(section);
+  } else {
+    counters.forEach(animateCounter);
+  }
+})();
