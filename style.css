@@ -23,7 +23,6 @@
 
 
 /* Official WISE crest and 2024 Top 10 recognition badge */
-:root{--gold:#c51b78;--gold2:#e65a9c;--green:#c51b78;--ivory:#ffffff;--white:#ffffff}
 .brand-logo{display:block;width:72px;height:72px;object-fit:contain;flex:0 0 auto}
 .brand{gap:12px}
 .recognition-visual{position:relative;min-height:330px;overflow:hidden;background:#f7fbff}
@@ -36,7 +35,7 @@
 
 /* Gentle, continuous fade animation for WISE website photography */
 @keyframes wise-image-fade {
-  0%, 100% { opacity: .88; }
+  0%, 100% { opacity: .82; }
   50% { opacity: 1; }
 }
 .intro-photo img,
