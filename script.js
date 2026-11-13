@@ -107,10 +107,11 @@ if (year) year.textContent = new Date().getFullYear();
 })();
 
 
-// Student navigation dropdown (supports touch/mobile)
-const studentDropdown = document.querySelector('.nav-dropdown');
-const studentDropdownButton = document.querySelector('.nav-drop-toggle');
-studentDropdownButton?.addEventListener('click', () => {
-  const isOpen = studentDropdown.classList.toggle('open');
-  studentDropdownButton.setAttribute('aria-expanded', String(isOpen));
+// Navigation dropdowns (supports touch/mobile)
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+  const button = dropdown.querySelector('.nav-drop-toggle');
+  button?.addEventListener('click', () => {
+    const isOpen = dropdown.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(isOpen));
+  });
 });
