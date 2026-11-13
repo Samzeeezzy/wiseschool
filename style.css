@@ -172,3 +172,23 @@
  .nav-dropdown-menu{position:static;box-shadow:none;border:0;border-left:2px solid var(--gold);margin:0 0 5px 8px;padding:2px 8px;background:#f7fbff}
  .nav-dropdown-menu a{padding:9px 12px!important}
 }
+
+/* Classic WISE leadership and campus profile cards */
+.leadership{background:#fff}
+.leadership .section-heading h2{color:var(--navy)}
+.leadership .section-heading h2 em{color:#1769c2}
+.leadership .section-heading p{color:var(--muted)}
+.leadership-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.leadership-card{background:#fff;border:1px solid #e6d7a7;box-shadow:0 16px 42px rgba(16,55,91,.08);transition:transform .3s ease,box-shadow .3s ease;overflow:hidden}
+.leadership-card:hover{transform:translateY(-6px);box-shadow:0 23px 48px rgba(16,55,91,.14)}
+.leadership-photo{height:245px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(145deg,#eaf3fb,#fdf9ec);border-bottom:1px solid #e6d7a7;color:#9a7628;position:relative}
+.leadership-photo:before{content:"";position:absolute;inset:10px;border:1px dashed rgba(164,122,32,.42);pointer-events:none}
+.photo-mark{font:600 32px var(--serif);letter-spacing:.08em;color:#1769c2}
+.leadership-photo small{font-size:8px;font-weight:800;letter-spacing:.16em;color:#8b7952}
+.leadership-info{padding:23px 25px 27px}
+.leadership-kicker{font-size:8px;font-weight:800;letter-spacing:.15em;color:#258451}
+.leadership-info h3{font:600 23px/1.25 var(--serif);color:var(--navy);margin:9px 0}
+.leadership-info p{font-size:11px;line-height:1.8;color:var(--muted);margin:0}
+@media(max-width:900px){.leadership-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.leadership-grid{grid-template-columns:1fr}.leadership-photo{height:225px}.leadership-info{padding:21px}}
+@media(prefers-reduced-motion:reduce){.leadership-card{transition:none}.leadership-card:hover{transform:none}}
