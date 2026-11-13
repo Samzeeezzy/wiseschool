@@ -222,3 +222,10 @@
 @media(max-width:820px){.glance-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:540px){.glance-grid{grid-template-columns:1fr}.glance-card{min-height:195px}}
 @media(prefers-reduced-motion:reduce){.glance-number{scroll-behavior:auto}}
+
+
+/* Classic line icons above WISE at-a-glance achievement figures */
+.glance-icon{width:52px;height:52px;display:grid;place-items:center;margin:17px 0 0;color:#a47a20;background:linear-gradient(145deg,#fffdf6,#f7edcf);border:1px solid #d8bd78;border-radius:50%;box-shadow:0 5px 16px rgba(164,122,32,.10)}
+.glance-icon svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.glance-number{margin:10px 0 5px}
+@media(prefers-reduced-motion:reduce){.glance-icon{transition:none}}
