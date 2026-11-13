@@ -156,3 +156,19 @@
  .nav-dropdown-menu a{padding:9px 12px!important}
  .alumni-inner{align-items:flex-start;flex-direction:column}
 }
+
+
+/* Separate Student and Teachers navigation dropdowns */
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-drop-toggle{display:flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--navy);font:600 12px var(--sans);cursor:pointer;padding:10px 0}
+.nav-drop-toggle span{color:#a47a20;font-size:15px}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:-16px;min-width:150px;padding:9px;background:#fff;border:1px solid #e8dfca;box-shadow:0 14px 30px rgba(12,44,83,.14);z-index:100}
+.nav-dropdown-menu a{display:block;padding:11px 13px!important;color:var(--navy);font-size:12px!important}
+.nav-dropdown-menu a:hover{background:#f2f7fc;color:#1769c2}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown.open .nav-dropdown-menu{display:block}
+@media(max-width:820px){
+ .nav-dropdown{display:block}
+ .nav-drop-toggle{width:100%;justify-content:space-between;padding:10px 0}
+ .nav-dropdown-menu{position:static;box-shadow:none;border:0;border-left:2px solid var(--gold);margin:0 0 5px 8px;padding:2px 8px;background:#f7fbff}
+ .nav-dropdown-menu a{padding:9px 12px!important}
+}
