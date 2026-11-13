@@ -306,3 +306,10 @@
 .wise-orbit-intro .wise-star-seal{position:relative;top:auto;right:auto;bottom:auto;width:clamp(165px,18vw,210px);flex:0 0 auto}
 @media(max-width:820px){.wise-orbit-intro .wise-star-seal{top:auto;right:auto;bottom:auto;width:155px;outline-offset:5px}}
 @media(max-width:540px){.wise-orbit-intro{padding:34px 16px 28px}.wise-orbit-intro .wise-star-seal{top:auto;right:auto;bottom:auto;width:135px;gap:5px}.wise-orbit-intro .seal-star{font-size:30px}.wise-orbit-intro .wise-star-seal strong{font-size:18px}.wise-orbit-intro .wise-star-seal small{font-size:6px;letter-spacing:.1em}}
+
+
+/* Fixed WhatsApp contact button — stays in place while the page scrolls */
+.wise-whatsapp-fixed{position:fixed;right:24px;bottom:24px;z-index:9999;display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:#20b968;color:#fff;text-decoration:none;font:700 13px var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.22);transition:background .2s,box-shadow .2s}
+.wise-whatsapp-fixed:hover{background:#159653;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+.wise-whatsapp-fixed svg{width:25px;height:25px;flex:0 0 auto}
+@media(max-width:540px){.wise-whatsapp-fixed{right:15px;bottom:15px;padding:12px;border-radius:50%;width:52px;height:52px;justify-content:center}.wise-whatsapp-fixed span{display:none}.wise-whatsapp-fixed svg{width:27px;height:27px}}
