@@ -229,3 +229,25 @@
 .glance-icon svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
 .glance-number{margin:10px 0 5px}
 @media(prefers-reduced-motion:reduce){.glance-icon{transition:none}}
+
+
+/* Premium, continuously scrolling WISE showcase grids */
+.wise-showcase{background:linear-gradient(180deg,#f4f8fc 0%,#fff 100%);overflow:hidden}
+.wise-showcase .split-heading{margin-bottom:34px}
+.showcase-row{width:100%;overflow:hidden;position:relative;padding:10px 0 22px;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.showcase-track{display:flex;gap:18px;width:max-content;padding:0 18px;animation:wise-marquee 48s linear infinite}
+.showcase-row-reverse .showcase-track{animation-name:wise-marquee-reverse;animation-duration:54s}
+.showcase-row:hover .showcase-track,.showcase-row:focus-within .showcase-track{animation-play-state:paused}
+.showcase-card{width:340px;min-height:330px;background:#fff;border:1px solid #e3eaf1;box-shadow:0 14px 35px rgba(16,55,91,.09);overflow:hidden;flex:0 0 auto}
+.showcase-card img{display:block;width:100%;height:190px;object-fit:cover}
+.showcase-card>div{padding:18px 21px 21px}
+.showcase-card small,.showcase-tile small{font-size:8px;font-weight:800;letter-spacing:.15em;color:#258451}
+.showcase-card h3,.showcase-tile h3{font:600 22px/1.2 var(--serif);color:var(--navy);margin:8px 0}
+.showcase-card p,.showcase-tile p{font-size:11px;line-height:1.7;color:var(--muted);margin:0}
+.showcase-tile{width:270px;min-height:205px;padding:25px 25px 27px;background:#fff;border:1px solid #e6d7a7;box-shadow:0 12px 32px rgba(16,55,91,.07);flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.showcase-tile>span{width:39px;height:39px;display:grid;place-items:center;border:1px solid #d8bd78;border-radius:50%;background:#fff9e8;color:#a47a20;font-size:21px;margin-bottom:15px}
+.showcase-foot{display:flex;justify-content:space-between;gap:16px;padding-top:10px;color:#7b8b9b;font-size:8px;font-weight:800;letter-spacing:.13em}
+@keyframes wise-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes wise-marquee-reverse{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(max-width:600px){.showcase-card{width:285px;min-height:305px}.showcase-card img{height:165px}.showcase-tile{width:235px;min-height:195px}.showcase-foot{padding-top:4px;font-size:7px;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){.showcase-track{animation:none;transform:none}.showcase-row{overflow-x:auto;scrollbar-width:thin}.showcase-foot{display:none}}
