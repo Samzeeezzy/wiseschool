@@ -105,3 +105,12 @@ if (year) year.textContent = new Date().getFullYear();
   intro.querySelector('.wise-intro-skip').addEventListener('click', closeIntro);
   window.setTimeout(closeIntro, 2850);
 })();
+
+
+// Student navigation dropdown (supports touch/mobile)
+const studentDropdown = document.querySelector('.nav-dropdown');
+const studentDropdownButton = document.querySelector('.nav-drop-toggle');
+studentDropdownButton?.addEventListener('click', () => {
+  const isOpen = studentDropdown.classList.toggle('open');
+  studentDropdownButton.setAttribute('aria-expanded', String(isOpen));
+});
