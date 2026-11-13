@@ -481,3 +481,30 @@
   .why-wise-card{min-height:0;padding:30px 25px 28px;border-radius:16px}
 }
 @media(prefers-reduced-motion:reduce){.why-wise-card{transition:none}.why-wise-card:hover{transform:none}}
+
+
+/* WISE card-shuffle entrance animation */
+@keyframes wise-card-shuffle {
+  0% { opacity:0; transform:translate3d(76px,22px,0) rotate(8deg) scale(.94); }
+  58% { opacity:1; transform:translate3d(-9px,-3px,0) rotate(-2deg) scale(1.015); }
+  78% { transform:translate3d(3px,0,0) rotate(1deg) scale(.995); }
+  100% { opacity:1; transform:translate3d(0,0,0) rotate(0) scale(1); }
+}
+.why-wise.wise-shuffle-ready .why-wise-card {
+  opacity:0;
+  transform:translate3d(76px,22px,0) rotate(8deg) scale(.94);
+}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card {
+  animation:wise-card-shuffle .85s cubic-bezier(.2,.75,.25,1) both;
+}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card:nth-child(1){animation-delay:.05s}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card:nth-child(2){animation-delay:.19s}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card:nth-child(3){animation-delay:.33s}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card:nth-child(4){animation-delay:.47s}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card:nth-child(5){animation-delay:.61s}
+.why-wise.wise-shuffle-ready.wise-shuffle-visible .why-wise-card:nth-child(6){animation-delay:.75s}
+.why-wise-card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 19px 36px rgba(18,59,99,.14)}
+@media(prefers-reduced-motion:reduce){
+  .why-wise.wise-shuffle-ready .why-wise-card{opacity:1;transform:none;animation:none!important}
+  .why-wise-card:hover{transform:none}
+}
