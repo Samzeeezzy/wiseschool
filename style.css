@@ -508,3 +508,11 @@
   .why-wise.wise-shuffle-ready .why-wise-card{opacity:1;transform:none;animation:none!important}
   .why-wise-card:hover{transform:none}
 }
+
+
+/* Proposal phase 1: BTS scholarship, FAQs and document request */
+.bts-panel{display:grid;grid-template-columns:180px 1fr;gap:34px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,54px);box-shadow:0 18px 55px rgba(20,55,85,.07)}
+.bts-panel-mark{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--navy),#0d4f91);border:8px solid #f7d96f;outline:1px solid var(--green);outline-offset:7px;color:#fff;font:700 32px var(--serif);letter-spacing:.1em}
+.bts-panel h3{font:600 clamp(24px,3vw,36px)/1.2 var(--serif);color:var(--navy);margin:10px 0}.bts-panel p,.downloads-note p{color:var(--muted);max-width:720px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}.faq-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}.faq-item summary{cursor:pointer;font-weight:700;color:var(--navy);list-style:none}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary:after{content:'+';float:right;color:var(--green);font-size:20px}.faq-item[open] summary:after{content:'−'}.faq-item p{color:var(--muted);font-size:13px;margin:14px 0 0}.downloads-note{margin-top:24px;padding:26px;background:#eef6ff;border-left:4px solid var(--gold);border-radius:8px}.downloads-note strong{color:var(--navy)}
+@media(max-width:700px){.bts-panel{grid-template-columns:1fr;text-align:center}.bts-panel-mark{margin:0 auto}.bts-panel .hero-actions{justify-content:center}.faq-grid{grid-template-columns:1fr}}
