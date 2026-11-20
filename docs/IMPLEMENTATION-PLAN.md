@@ -10,10 +10,11 @@ This repository is the existing WISE public website. Development is staged again
 - Keep beneficiary identities and sensitive student information private.
 
 ## Phase 2 — Platform foundation
-- Confirm the school's chosen backend/hosting and database provider.
+- Confirm the school's chosen backend/hosting and database provider. Current direction: cPanel hosting, PHP backend and MySQL/MariaDB database, subject to the purchased host's actual specifications.
 - Configure separate development and production environments.
 - Design relational records for academic sessions/terms, classes/arms, subjects, students, guardians, staff, admissions, attendance, assessments, fees, announcements, learning resources and alumni.
 - Implement secure authentication, role-based permissions, audit logging, backups and recovery before loading real student data.
+- Apply the approved Google sign-in + WISE school-code onboarding policy for every user category. Only the Super Administrator generates, issues, revokes and reissues individual codes. Parents/guardians are verified against a student's admission record and an explicitly school-approved guardian relationship; an admission number alone is never sufficient. See [Authentication Architecture](AUTHENTICATION-ARCHITECTURE.md).
 
 ## Phase 3 — School operations
 - Admin dashboard and content management.
@@ -41,8 +42,10 @@ This repository is the existing WISE public website. Development is staged again
 
 ## Required decisions and school-supplied materials
 Before production data or sensitive workflows are enabled, obtain:
-- Written approval of the system owner and named administrators.
-- Backend/database/hosting choice and access controlled by the school.
+- Written approval of the system owner and named Super Administrator(s), including account recovery and MFA policy.
+- School-owned cPanel hosting/domain details, PHP/MySQL versions and access controlled by the school.
+- A school-controlled Google Cloud project and OAuth consent/redirect configuration.
+- Verified staff/student records and guardian/admission relationships, imported securely; approved parent/guardian identity-check and code-delivery process.
 - Approved admission rules, fee schedules, grading scale, assessment weights, term/session structure and result approval workflow.
 - Staff roles, class/subject assignments and verified student/guardian records through a secure onboarding process.
 - Approved privacy notice, consent process, retention rules and student-photo permissions.
@@ -51,9 +54,12 @@ Before production data or sensitive workflows are enabled, obtain:
 - Email/SMS/WhatsApp/payment/AI provider choices and API credentials stored only as server-side secrets.
 
 ## Safety and release rules
-- Never put database service-role keys, AI keys, payment secrets or SMTP passwords in browser JavaScript or a public repository.
+- Never put database service-role keys, AI keys, payment secrets, OAuth client secrets or SMTP passwords in browser JavaScript or a public repository.
 - Do not use demo credentials or browser-only checks as authentication.
 - Enforce authorisation on the server/database for every student, parent, teacher and administrator action.
+- Google identity verification and WISE school authorisation are separate checks. Every category must be provisioned and verified before activation.
+- Only the Super Administrator may generate, issue, revoke or reissue individual school verification codes. Store code hashes only; codes must be one-time, expiring, rate-limited and tied to a pre-existing school record/category.
+- Parent access requires a school-approved guardian relationship to the relevant admission/student record. Admission number alone must never grant access or create a guardian link.
 - Validate and restrict uploads; protect against SQL injection, XSS, CSRF and unauthorised record access.
 - Use HTTPS, least-privilege access, audit logs, routine backups and tested recovery.
 - Do not publish real student data, private results, scholarship beneficiary details or unapproved documents.
