@@ -28,7 +28,7 @@ Set the server environment variable `WISE_CONFIG_PATH` to the absolute path of `
 3. Copy `config.example.php` to a private `config.php` outside `public_html`.
 4. Set database credentials and a random 32-byte-or-longer application secret in that private file.
 5. Copy `app/` to the private application directory and `public/` to the chosen public API directory.
-6. Set `WISE_APP_PATH` to the private application directory, or adjust the API bootstrap include to the exact private path.
+6. Set the server environment variable `WISE_APP_PATH` to `/home/ACCOUNT/wise-private` (the directory containing `app/`). The API uses this private path to load application code.
 7. Enable HTTPS before allowing any sign-in or code redemption.
 8. Test in a separate staging database before importing real school records.
 
