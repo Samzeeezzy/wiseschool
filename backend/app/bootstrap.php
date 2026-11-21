@@ -106,7 +106,7 @@ function wise_require_csrf(): void
 function wise_audit(PDO $pdo, ?int $actorId, string $event, ?string $targetType = null, ?int $targetId = null, array $details = []): void
 {
     $stmt = $pdo->prepare(
-        'INSERT INTO audit_logs (actor_user_id,event_type,target_type,target_id,details_json,ip_address)
+        'INSERT INTO wise_audit_logs (actor_user_id,event_type,target_type,target_id,details_json,ip_address)
          VALUES (:actor,:event,:type,:target,:details,:ip)'
     );
     $stmt->execute([
