@@ -23,8 +23,8 @@ Keep the application and configuration outside the public web root where possibl
 Set the server environment variable `WISE_CONFIG_PATH` to the absolute path of `wise-private/config.php`. If the host does not allow environment variables, configure it in a server-level setting or a protected PHP-FPM/Apache configuration; do not place credentials in a public file.
 
 ## Setup
-1. Create a MySQL database and a least-privilege database user in cPanel.
-2. Import `database/schema.sql` into the new, empty database.
+1. Use the hosting database and a dedicated least-privilege database user where the host permits it. Confirm permission to add tables first.
+2. Back up the existing database, then import `database/schema.sql`. The script creates only `wise_`-prefixed tables and does not drop or alter existing tables.
 3. Copy `config.example.php` to a private `config.php` outside `public_html`.
 4. Set database credentials and a random 32-byte-or-longer application secret in that private file.
 5. Copy `app/` to the private application directory and `public/` to the chosen public API directory.
@@ -48,3 +48,7 @@ The API generates a random 128-bit code for one existing school record and categ
 
 ## Before production
 Confirm the cPanel PHP/MySQL versions, domain and HTTPS, school-controlled Google Cloud OAuth project, named Super Administrators and MFA/recovery plan, verified school records, parent identity/guardian approval process, privacy/retention policy and approved code delivery channel.
+
+
+## Shared database compatibility
+The schema and PHP queries use the `wise_` prefix for every WISE table so they can coexist with unrelated applications in a shared database. The import uses `CREATE TABLE IF NOT EXISTS` and `INSERT IGNORE`; it does not drop, empty, rename, or alter the existing `bookings`, `currency`, `foradmin`, or `subscribed` tables. Back up the database before importing. Do not use the earlier unprefixed schema file.
