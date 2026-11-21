@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 $wiseAppPath = getenv('WISE_APP_PATH') ?: dirname(__DIR__, 3);
 require_once rtrim($wiseAppPath, DIRECTORY_SEPARATOR) . '/app/bootstrap.php';
-require_once rtrim($wiseAppPath, DIRECTORY_SEPARATOR) . '/app/verification_codes.php';
+require_once rtrim($wiseAppPath, DIRECTORY_SEPARATOR) . '/app/wise_verification_codes.php';
 
 try {
     $actorId = wise_require_super_admin();
@@ -21,8 +21,8 @@ try {
                       WHEN vc.expires_at <= UTC_TIMESTAMP() THEN 'expired'
                       ELSE 'issued'
                     END AS status
-             FROM verification_codes vc
-             INNER JOIN school_people sp ON sp.id = vc.target_person_id
+             FROM wise_verification_codes vc
+             INNER JOIN wise_school_people sp ON sp.id = vc.target_person_id
              ORDER BY vc.issued_at DESC
              LIMIT 200"
         );
@@ -57,7 +57,7 @@ try {
             wise_json_response(422, ['ok' => false, 'error' => 'Choose a valid existing school record, category and expiry (1–168 hours).']);
         }
 
-        $personStmt = $pdo->prepare('SELECT id,person_type,full_name,expected_email,status,linked_user_id FROM school_people WHERE id = :id');
+        $personStmt = $pdo->prepare('SELECT id,person_type,full_name,expected_email,status,linked_user_id FROM wise_school_people WHERE id = :id');
         $personStmt->execute([':id' => $personId]);
         $person = $personStmt->fetch();
         if (!$person || $person['person_type'] !== $categoryToPersonType[$category] || $person['status'] !== 'active' || !empty($person['linked_user_id'])) {
@@ -66,12 +66,12 @@ try {
 
         $pdo->beginTransaction();
         // Reissue semantics: invalidate every previous unused code for this record/category.
-        $revoke = $pdo->prepare('UPDATE verification_codes SET revoked_at = UTC_TIMESTAMP() WHERE target_person_id = :person AND category = :category AND redeemed_at IS NULL AND revoked_at IS NULL');
+        $revoke = $pdo->prepare('UPDATE wise_verification_codes SET revoked_at = UTC_TIMESTAMP() WHERE target_person_id = :person AND category = :category AND redeemed_at IS NULL AND revoked_at IS NULL');
         $revoke->execute([':person' => $personId, ':category' => $category]);
 
         $plainCode = wise_generate_verification_code();
         $insert = $pdo->prepare(
-            'INSERT INTO verification_codes (code_hash,category,target_person_id,expected_google_email,expires_at,max_attempts,issued_by_user_id)
+            'INSERT INTO wise_verification_codes (code_hash,category,target_person_id,expected_google_email,expires_at,max_attempts,issued_by_user_id)
              VALUES (:hash,:category,:person,:email,DATE_ADD(UTC_TIMESTAMP(), INTERVAL :hours HOUR),5,:issuer)'
         );
         $insert->bindValue(':hash', wise_code_hash($plainCode));
@@ -103,7 +103,7 @@ try {
             wise_json_response(422, ['ok' => false, 'error' => 'A valid code record is required.']);
         }
         $pdo->beginTransaction();
-        $stmt = $pdo->prepare('UPDATE verification_codes SET revoked_at = UTC_TIMESTAMP() WHERE id = :id AND redeemed_at IS NULL AND revoked_at IS NULL');
+        $stmt = $pdo->prepare('UPDATE wise_verification_codes SET revoked_at = UTC_TIMESTAMP() WHERE id = :id AND redeemed_at IS NULL AND revoked_at IS NULL');
         $stmt->execute([':id' => $codeId]);
         if ($stmt->rowCount() === 1) {
             wise_audit($pdo, $actorId, 'verification_code.revoked', 'verification_code', $codeId);
