@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS wise_school_people (
   UNIQUE KEY uq_school_person_user (linked_user_id),
   KEY idx_school_people_email (expected_email),
   KEY idx_school_people_status (status),
-  CONSTRAINT fk_school_people_user FOREIGN KEY (linked_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
+  CONSTRAINT wise_fk_school_people_user FOREIGN KEY (linked_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS wise_roles (
@@ -59,9 +59,9 @@ CREATE TABLE IF NOT EXISTS wise_user_roles (
   assigned_by_user_id BIGINT UNSIGNED NULL,
   assigned_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, role_id),
-  CONSTRAINT fk_user_roles_user FOREIGN KEY (user_id) REFERENCES wise_users(id) ON DELETE CASCADE,
-  CONSTRAINT fk_user_roles_role FOREIGN KEY (role_id) REFERENCES wise_roles(id),
-  CONSTRAINT fk_user_roles_assigner FOREIGN KEY (assigned_by_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
+  CONSTRAINT wise_fk_user_roles_user FOREIGN KEY (user_id) REFERENCES wise_users(id) ON DELETE CASCADE,
+  CONSTRAINT wise_fk_user_roles_role FOREIGN KEY (role_id) REFERENCES wise_roles(id),
+  CONSTRAINT wise_fk_user_roles_assigner FOREIGN KEY (assigned_by_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS wise_verification_codes (
@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS wise_verification_codes (
   UNIQUE KEY uq_verification_code_hash (code_hash),
   KEY idx_verification_target (target_person_id, category),
   KEY idx_verification_expiry (expires_at),
-  CONSTRAINT fk_verification_target FOREIGN KEY (target_person_id) REFERENCES wise_school_people(id),
-  CONSTRAINT fk_verification_issuer FOREIGN KEY (issued_by_user_id) REFERENCES wise_users(id)
+  CONSTRAINT wise_fk_verification_target FOREIGN KEY (target_person_id) REFERENCES wise_school_people(id),
+  CONSTRAINT wise_fk_verification_issuer FOREIGN KEY (issued_by_user_id) REFERENCES wise_users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS wise_audit_logs (
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS wise_audit_logs (
   PRIMARY KEY (id),
   KEY idx_audit_actor_time (actor_user_id, created_at),
   KEY idx_audit_event_time (event_type, created_at),
-  CONSTRAINT fk_audit_actor FOREIGN KEY (actor_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
+  CONSTRAINT wise_fk_audit_actor FOREIGN KEY (actor_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Parent-child links are deliberately approval-based, not inferred from admission number.
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS wise_parent_student_links (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uq_parent_student_relationship (parent_person_id, student_person_id),
-  CONSTRAINT fk_psl_parent FOREIGN KEY (parent_person_id) REFERENCES wise_school_people(id),
-  CONSTRAINT fk_psl_student FOREIGN KEY (student_person_id) REFERENCES wise_school_people(id),
-  CONSTRAINT fk_psl_approver FOREIGN KEY (approved_by_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
+  CONSTRAINT wise_fk_psl_parent FOREIGN KEY (parent_person_id) REFERENCES wise_school_people(id),
+  CONSTRAINT wise_fk_psl_student FOREIGN KEY (student_person_id) REFERENCES wise_school_people(id),
+  CONSTRAINT wise_fk_psl_approver FOREIGN KEY (approved_by_user_id) REFERENCES wise_users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
