@@ -27,7 +27,7 @@ function wise_redeem_code(PDO $pdo, string $code, string $category, int $personI
     }
 
     $hash = wise_code_hash($code);
-    $stmt = $pdo->prepare('SELECT * FROM verification_codes WHERE code_hash = :hash FOR UPDATE');
+    $stmt = $pdo->prepare('SELECT * FROM wise_verification_codes WHERE code_hash = :hash FOR UPDATE');
     $stmt->execute([':hash' => $hash]);
     $row = $stmt->fetch();
 
@@ -42,7 +42,7 @@ function wise_redeem_code(PDO $pdo, string $code, string $category, int $personI
         throw new DomainException('Verification could not be completed.');
     }
 
-    $personStmt = $pdo->prepare('SELECT expected_email,status FROM school_people WHERE id = :id FOR UPDATE');
+    $personStmt = $pdo->prepare('SELECT expected_email,status FROM wise_school_people WHERE id = :id FOR UPDATE');
     $personStmt->execute([':id' => $personId]);
     $person = $personStmt->fetch();
     if (!$person || $person['status'] !== 'active') {
@@ -51,12 +51,12 @@ function wise_redeem_code(PDO $pdo, string $code, string $category, int $personI
 
     $expected = $row['expected_google_email'] ?: $person['expected_email'];
     if ($expected !== null && ($verifiedGoogleEmail === null || !hash_equals(strtolower($expected), strtolower($verifiedGoogleEmail)))) {
-        $attempt = $pdo->prepare('UPDATE verification_codes SET attempt_count = attempt_count + 1 WHERE id = :id');
+        $attempt = $pdo->prepare('UPDATE wise_verification_codes SET attempt_count = attempt_count + 1 WHERE id = :id');
         $attempt->execute([':id' => $row['id']]);
         throw new DomainException('Verification could not be completed.');
     }
 
-    $consume = $pdo->prepare('UPDATE verification_codes SET redeemed_at = UTC_TIMESTAMP() WHERE id = :id AND redeemed_at IS NULL AND revoked_at IS NULL');
+    $consume = $pdo->prepare('UPDATE wise_verification_codes SET redeemed_at = UTC_TIMESTAMP() WHERE id = :id AND redeemed_at IS NULL AND revoked_at IS NULL');
     $consume->execute([':id' => $row['id']]);
     if ($consume->rowCount() !== 1) {
         throw new DomainException('Verification could not be completed.');
