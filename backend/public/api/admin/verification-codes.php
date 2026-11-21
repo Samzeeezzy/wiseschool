@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-require_once dirname(__DIR__, 3) . '/app/bootstrap.php';
-require_once dirname(__DIR__, 3) . '/app/verification_codes.php';
+$wiseAppPath = getenv('WISE_APP_PATH') ?: dirname(__DIR__, 3);
+require_once rtrim($wiseAppPath, DIRECTORY_SEPARATOR) . '/app/bootstrap.php';
+require_once rtrim($wiseAppPath, DIRECTORY_SEPARATOR) . '/app/verification_codes.php';
 
 try {
     $actorId = wise_require_super_admin();
@@ -56,7 +57,7 @@ try {
             wise_json_response(422, ['ok' => false, 'error' => 'Choose a valid existing school record, category and expiry (1–168 hours).']);
         }
 
-        $personStmt = $pdo->prepare('SELECT id,person_type,full_name,expected_email,status FROM school_people WHERE id = :id');
+        $personStmt = $pdo->prepare('SELECT id,person_type,full_name,expected_email,status,linked_user_id FROM school_people WHERE id = :id');
         $personStmt->execute([':id' => $personId]);
         $person = $personStmt->fetch();
         if (!$person || $person['person_type'] !== $categoryToPersonType[$category] || $person['status'] !== 'active' || !empty($person['linked_user_id'])) {
