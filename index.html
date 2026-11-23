@@ -10,6 +10,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=16">
+
+  <style>
+    .awards-photo-grid .award-photo {
+      display:block;width:100%;aspect-ratio:1/1;object-fit:cover;
+      border-radius:12px;margin:0 0 20px;
+    }
+    .awards-photo-grid .award-card { overflow:hidden; }
+    .campus-photo-grid .leadership-photo {
+      position:relative;overflow:hidden;min-height:250px;
+    }
+    .campus-photo-grid .leadership-photo img {
+      display:block;width:100%;height:250px;object-fit:cover;
+    }
+    .campus-photo-label {
+      position:absolute;left:14px;bottom:14px;padding:8px 13px;
+      border-radius:6px;background:#1769C2;color:#fff;
+      font-weight:700;letter-spacing:.04em;
+    }
+    @media(max-width:700px) {
+      .awards-photo-grid,.campus-photo-grid { grid-template-columns:1fr; }
+    }
+  </style>
+
 </head>
 <body>
   <div class="topbar"><div class="container topbar-inner">
@@ -211,10 +234,31 @@
 
     <section class="awards section-pad" id="awards"><div class="container">
       <div class="section-heading centered"><span class="eyebrow"><span></span> EXCELLENCE RECOGNISED</span><h2>Honouring the people<br><em>and purpose behind WISE.</em></h2><p>We celebrate the educators and learners whose commitment to excellence continues to place WISE on the map.</p></div>
-      <div class="awards-grid">
-        <article class="award-card award-global"><div class="award-topline"><span>GLOBAL SCHOOL RECOGNITION</span><span class="award-year">2024</span></div><div class="award-emblem" aria-hidden="true"><span>✦</span><small>TOP 10</small></div><p class="award-category">WORLD'S BEST SCHOOL PRIZES</p><h3>Top 10 — Overcoming Adversity</h3><p>WISE was recognised among the Top 10 schools globally for its work addressing community challenges through education and action.</p><a class="award-link" href="https://t4.education/worlds-best-school-prizes/the-five-prizes/overcoming-adversity/" target="_blank" rel="noopener">Explore the recognition <span>↗</span></a></article>
-        <article class="award-card award-winner"><div class="award-topline"><span>NATIONAL TEACHER HONOUR</span><span class="award-year">2025</span></div><div class="award-emblem" aria-hidden="true"><span>♛</span><small>WINNER</small></div><p class="award-category">MALTINA TEACHER OF THE YEAR</p><h3>Ms. Serah Yusuf</h3><p>Overall winner of the 2025 Maltina Teacher of the Year competition, representing Wisdom International School of Excellence, Abuja.</p><a class="award-link" href="https://nbfoeducationtrustfund.org/serah-yusuf-fct-teacher-emerges-maltina-teacher-of-the-year-2025/" target="_blank" rel="noopener">Read the official announcement <span>↗</span></a></article>
-        <article class="award-card"><div class="award-topline"><span>NATIONAL TEACHER HONOUR</span><span class="award-year">2026</span></div><div class="award-emblem" aria-hidden="true"><span>✧</span><small>1ST RUNNER-UP</small></div><p class="award-category">MALTINA TEACHER OF THE YEAR</p><h3>Mrs. Yusuf Cariyat</h3><p>Recognised as 1st Runner-Up in the 2026 Maltina Teacher of the Year competition.</p><a class="award-link" href="https://guardian.ng/education/lagos-teacher-wins-2026-maltina-teacher-of-the-year-competition/" target="_blank" rel="noopener">Read the news report <span>↗</span></a></article>
+      <div class="awards-grid awards-photo-grid">
+        <article class="award-card award-global">
+          <img class="award-photo" src="assets/wise-world-best-school-top-10-2024.jpeg" alt="WISE Top 10 World's Best School Prizes 2024 recognition">
+          <div class="award-topline"><span>GLOBAL SCHOOL RECOGNITION</span><span class="award-year">2024</span></div>
+          <p class="award-category">WORLD'S BEST SCHOOL PRIZES</p>
+          <h3>Top 10 — Overcoming Adversity</h3>
+          <p>WISE was recognised among the Top 10 schools globally for its work addressing community challenges through education and action.</p>
+          <a class="award-link" href="https://t4.education/worlds-best-school-prizes/the-five-prizes/overcoming-adversity/" target="_blank" rel="noopener">Explore the recognition <span>↗</span></a>
+        </article>
+        <article class="award-card award-winner">
+          <img class="award-photo" src="assets/maltina-serah-yusuf-2025.jpeg" alt="Serah Yusuf, Maltina Teacher of the Year 2025 winner">
+          <div class="award-topline"><span>MALTINA TEACHER OF THE YEAR</span><span class="award-year">2025</span></div>
+          <p class="award-category">NATIONAL TEACHER HONOUR</p>
+          <h3>Serah Yusuf</h3>
+          <p>Winner of the 2025 Maltina Teacher of the Year, representing Wisdom International School of Excellence, Abuja.</p>
+          <a class="award-link" href="https://nbfoeducationtrustfund.org/serah-yusuf-fct-teacher-emerges-maltina-teacher-of-the-year-2025/" target="_blank" rel="noopener">Read the official announcement <span>↗</span></a>
+        </article>
+        <article class="award-card">
+          <img class="award-photo" src="assets/maltina-yusuf-cariyat-2026.jpeg" alt="Yusuf Cariyat, Maltina Teacher of the Year 2026 first runner-up">
+          <div class="award-topline"><span>MALTINA TEACHER OF THE YEAR</span><span class="award-year">2026</span></div>
+          <p class="award-category">NATIONAL TEACHER HONOUR</p>
+          <h3>Yusuf Cariyat</h3>
+          <p>1st Runner-Up in the 2026 Maltina Teacher of the Year competition.</p>
+          <a class="award-link" href="https://guardian.ng/education/lagos-teacher-wins-2026-maltina-teacher-of-the-year-competition/" target="_blank" rel="noopener">Read the news report <span>↗</span></a>
+        </article>
       </div>
     </div></section>
 
@@ -225,26 +269,18 @@
           <h2>The people and places<br><em>behind the WISE story.</em></h2>
           <p>Meet the people serving WISE and discover our campus leadership. Profile photographs and further details will be added soon.</p>
         </div>
-        <div class="leadership-grid">
-          <article class="leadership-card">
-            <div class="leadership-photo"><span class="photo-mark">WISE</span><small>PORTRAIT TO BE ADDED</small></div>
-            <div class="leadership-info"><span class="leadership-kicker">SCHOOL LEADERSHIP</span><h3>Founder</h3><p>Founder of Wisdom International School of Excellence.</p></div>
+        <div class="leadership-grid campus-photo-grid">
+          <article class="leadership-card campus-card">
+            <div class="leadership-photo"><img src="https://www.wiseschool.com.ng/images/3.jpg" alt="WISE school learning environment"><span class="campus-photo-label">WISE 1</span></div>
+            <div class="leadership-info"><span class="leadership-kicker">HAAQ CAMPUS</span><h3>WISE 1</h3><p>Discover the WISE 1 campus and its learning community.</p></div>
           </article>
-          <article class="leadership-card">
-            <div class="leadership-photo"><span class="photo-mark">WISE</span><small>PORTRAIT TO BE ADDED</small></div>
-            <div class="leadership-info"><span class="leadership-kicker">TECHNICAL LEADERSHIP</span><h3>Technical Monitor</h3><p>Supporting the school's technical systems and learning environment.</p></div>
+          <article class="leadership-card campus-card">
+            <div class="leadership-photo"><img src="https://www.wiseschool.com.ng/userpix/1.jpg" alt="WISE pupils taking part in school activities"><span class="campus-photo-label">WISE 2</span></div>
+            <div class="leadership-info"><span class="leadership-kicker">HAAQ CAMPUS</span><h3>WISE 2</h3><p>Discover the WISE 2 campus and its learning community.</p></div>
           </article>
-          <article class="leadership-card">
-            <div class="leadership-photo"><span class="photo-mark">WISE 1</span><small>PORTRAIT TO BE ADDED</small></div>
-            <div class="leadership-info"><span class="leadership-kicker">CAMPUS LEADERSHIP</span><h3>HAAQ — WISE 1 Campus</h3><p>Campus leadership profile. Details and photograph coming soon.</p></div>
-          </article>
-          <article class="leadership-card">
-            <div class="leadership-photo"><span class="photo-mark">WISE 2</span><small>PORTRAIT TO BE ADDED</small></div>
-            <div class="leadership-info"><span class="leadership-kicker">CAMPUS LEADERSHIP</span><h3>HAAQ — WISE 2</h3><p>Campus leadership profile. Details and photograph coming soon.</p></div>
-          </article>
-          <article class="leadership-card">
-            <div class="leadership-photo"><span class="photo-mark">IWOPIN</span><small>PORTRAIT TO BE ADDED</small></div>
-            <div class="leadership-info"><span class="leadership-kicker">CAMPUS LEADERSHIP</span><h3>HAAQ — WICE IWOPIN</h3><p>Campus leadership profile. Details and photograph coming soon.</p></div>
+          <article class="leadership-card campus-card">
+            <div class="leadership-photo"><img src="https://www.wiseschool.com.ng/userpix/2.jpg" alt="WISE practical learning and technology activity"><span class="campus-photo-label">TECHNICAL MONITOR</span></div>
+            <div class="leadership-info"><span class="leadership-kicker">HAAQ CAMPUS</span><h3>Technical Monitor</h3><p>Explore the Technical Monitor campus entry and its learning environment.</p></div>
           </article>
         </div>
       </div>
