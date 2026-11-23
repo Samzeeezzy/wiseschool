@@ -194,6 +194,28 @@
 @media(prefers-reduced-motion:reduce){.leadership-card{transition:none}.leadership-card:hover{transform:none}}
 
 
+/* Campus leadership portraits: consistent crop and alignment */
+.campus-leadership .campus-leader-photo{
+  display:block;
+  height:290px;
+  min-height:290px;
+  padding:0;
+  overflow:hidden;
+  background:#eaf3fb;
+}
+.campus-leadership .campus-leader-photo:before{display:none}
+.campus-leadership .campus-leader-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 28%;
+}
+.campus-leadership .leadership-card{height:100%}
+@media(max-width:560px){
+  .campus-leadership .campus-leader-photo{height:320px;min-height:320px}
+}
+ 
 /* Back to School initiatives */
 .back-to-school{background:#edf5fc}
 .initiative-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
